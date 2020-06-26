@@ -1,0 +1,23 @@
+{
+  "name": "tip-integration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SidiBecker/tip-integration.git"
+  },
+  "author": "SidiBecker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SidiBecker/tip-integration/issues"
+  },
+  "homepage": "https://github.com/SidiBecker/tip-integration#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "request": "^2.88.2"
+  }
+}
