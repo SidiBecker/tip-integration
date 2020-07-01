@@ -24,9 +24,10 @@ module.exports = function (app) {
             'scope': 'donations.read socket.token',
         }
 
-        // not encoding params
         authorize_url += Object.keys(params).map(k => `${k}=${params[k]}`).join('&')
 
+        console.log(`Abra seu navegador no endereço: ${process.env.URL}:${process.env.PORT} e autorize o StreamLabs!`);
+    
         res.send(`<a href="${authorize_url}">Authorize with Streamlabs!</a>`)
     });
 

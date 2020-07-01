@@ -1,15 +1,12 @@
 const axios = require('axios');
+const io = require('socket.io-client');
 require('dotenv').config();
 
 
 module.exports = {
     token: function (code, res) {
 
-        console.log(`Parâmetro code: ${code}`)
-
-        console.log(process.env.TESTE)
-
-        console.log(process.env.CLIENT_ID);
+        console.log('\nAutorizando token...')
 
         axios.post(`${process.env.STREAMLABS_API}/token?`, {
             'grant_type': 'authorization_code',
@@ -18,13 +15,11 @@ module.exports = {
             'redirect_uri': `${process.env.URL}:${process.env.PORT}/connect`,
             'code': code
         }).then((response) => {
-            console.log('Token autorizado');
-
-            console.log(response.data);
-            //socket();
+            console.log('Token autorizado com sucesso!');
             getSocketToken(response.data.access_token, res);
         }).catch((error) => {
             console.log(error)
+            console.log('Houve um erro ao adquirir o token!');
         })
     }
 
@@ -33,30 +28,47 @@ module.exports = {
 
 function getSocketToken(acesstoken, res) {
 
+    console.log('\nAdquirindo token de acesso...');
     axios.get(`${process.env.STREAMLABS_API}/socket/token?access_token=${acesstoken}`).then((response) => {
-        console.log('socket autorizado');
-        console.log(response.data);
+        console.log('Token de acesso adquirido com sucesso!');
 
-        socket(response.data.socket_token);
-        res.redirect(`${process.env.URL}:${process.env.PORT}/success`);
+        initSocket(response.data.socket_token, res);
+
         return;
     }).catch((error) => {
         console.log(error)
-        console.log('erro socket token')
+        console.log('Erro ao adquirir o token de acesso.')
     })
 
 }
 
-function socket(token) {
+function initSocket(token, res) {
 
     //Connect to socket\
-    const io = require('socket.io-client');
+
+    console.log('\nIniciando socket...');
+
     const socket = io(`https://sockets.streamlabs.com?token=${token}`, {
         transports: ['websocket']
     });
 
+    socket.on('connect', function () {
+        console.log('Socket iniciado com sucesso!');
+        console.log('Você pode fechar a aba do seu navegador.');
+        console.log('\n\nATENÇÃO: Você deve manter esse programa aberto!');
+        res.redirect(`${process.env.URL}:${process.env.PORT}/success`);
+    });
+
     //Perform Action on event
     socket.on('event', (eventData) => {
+
+        function importDonate(name, email, amount, message) {
+
+            const streamelements = require('./streamelements');
+            streamelements.importDonate(name, email, amount, message);
+            console.log('Its a donation!')
+
+        }
 
         if (!(eventData.message != null && eventData.message.length > 0)) {
             return;
@@ -66,7 +78,7 @@ function socket(token) {
 
         if (event.isTest) {
             console.log(event);
-            console.log('It\'s a test. Ignoring integration...');
+            console.log('Teste recebido. Ignorando integração...');
             return;
         }
 
@@ -75,7 +87,7 @@ function socket(token) {
             //code to handle donation events
             console.log(eventData.message);
 
-            console.log('Its a donation!')
+            importDonate(event.name, event.name + '@gmail.com', event.amount, event.message);
         }
         if (eventData.for === 'twitch_account') {
             switch (eventData.type) {
@@ -94,7 +106,7 @@ function socket(token) {
                 case 'donation':
                     //code to handle subscription events
                     console.log(eventData.message);
-                    console.log('Its a donation!')
+                    importDonate(event.name, event.name + '@gmail.com', event.amount, event.message);
                     break;
                 default:
                     //default case
@@ -108,10 +120,8 @@ function socket(token) {
                     //code to handle subscription events
                     console.log(eventData.message);
 
-                    const streamelements = require('./streamelements');
-                    //TODO: Email
-                    streamelements.importDonate(event.name, event.name + '@gmail.com', event.amount, event.message);
-                    console.log('Its a donation!')
+                    //TODO: Donation
+                    importDonate(event.name, event.name + '@gmail.com', event.amount, event.message);
                     break;
                 default:
                     //default case
