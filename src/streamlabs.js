@@ -10,8 +10,8 @@ module.exports = {
 
         axios.post(`${process.env.STREAMLABS_API}/token?`, {
             'grant_type': 'authorization_code',
-            'client_id': process.env.CLIENT_ID,
-            'client_secret': process.env.CLIENT_SECRET,
+            'client_id': process.env.STREAMLABS_CLIENT_ID,
+            'client_secret': process.env.STREAMLABS_CLIENT_SECRET,
             'redirect_uri': `${process.env.URL}:${process.env.PORT}/connect`,
             'code': code
         }).then((response) => {

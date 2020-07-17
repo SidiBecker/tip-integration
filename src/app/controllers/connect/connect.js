@@ -13,22 +13,24 @@ module.exports = function (app) {
         streamlabs.token(req.query.code, res);
     });
 
-    app.get('/', (req, res) => {
+    app.get('/auth/streamlabs', (req, res) => {
 
         let authorize_url = `${process.env.STREAMLABS_API}/authorize?`
 
         let params = {
-            'client_id': process.env.CLIENT_ID,
+            'client_id': process.env.STREAMLABS_CLIENT_ID,
             'redirect_uri': `${process.env.URL}:${process.env.PORT}/connect`,
             'response_type': 'code',
             'scope': 'donations.read socket.token',
         }
+        debugger
 
         authorize_url += Object.keys(params).map(k => `${k}=${params[k]}`).join('&')
 
         console.log(`Abra seu navegador no endereço: ${process.env.URL}:${process.env.PORT} e autorize o StreamLabs!`);
-    
+
         res.send(`<a href="${authorize_url}">Authorize with Streamlabs!</a>`)
     });
+
 
 }
