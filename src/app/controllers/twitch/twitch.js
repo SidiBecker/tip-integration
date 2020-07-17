@@ -80,8 +80,6 @@ module.exports = function (app) {
   var template = handlebars.compile(`
 <html><head><title>Twitch Auth Sample</title></head>
 <table border="1">
-    <tr><th>Access Token</th><td>{{accessToken}}</td></tr>
-    <tr><th>Refresh Token</th><td>{{refreshToken}}</td></tr>
     <tr><th>Display Name</th><td>{{data.[0].display_name}}</td></tr>
     <tr><th>Bio</th><td>{{data.[0].description}}</td></tr>
     <tr><th>Image</th><td><img src="{{data.[0].profile_image_url}}"></td></tr>
