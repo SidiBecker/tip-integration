@@ -12,7 +12,7 @@ module.exports = {
             'grant_type': 'authorization_code',
             'client_id': process.env.STREAMLABS_CLIENT_ID,
             'client_secret': process.env.STREAMLABS_CLIENT_SECRET,
-            'redirect_uri': `${process.env.URL}:${process.env.PORT}/connect`,
+            'redirect_uri': `${process.env.STREAMLABS_CALLBACK_URL}`,
             'code': code
         }).then((response) => {
             console.log('Token autorizado com sucesso!');
