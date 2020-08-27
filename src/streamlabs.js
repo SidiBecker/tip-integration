@@ -10,8 +10,8 @@ module.exports = {
 
         axios.post(`${process.env.STREAMLABS_API}/token?`, {
             'grant_type': 'authorization_code',
-            'client_id': process.env.CLIENT_ID,
-            'client_secret': process.env.CLIENT_SECRET,
+            'client_id': process.env.STREAMLABS_CLIENT_ID,
+            'client_secret': process.env.STREAMLABS_CLIENT_SECRET,
             'redirect_uri': `${process.env.URL}:${process.env.PORT}/connect`,
             'code': code
         }).then((response) => {
@@ -56,7 +56,7 @@ function initSocket(token, res) {
         console.log('Socket iniciado com sucesso!');
         console.log('Você pode fechar a aba do seu navegador.');
         console.log('\n\nATENÇÃO: Você deve manter esse programa aberto!');
-        res.redirect(`${process.env.URL}:${process.env.PORT}/success`);
+        res.redirect(`${process.env.URL}:${process.env.PORT}/`);
     });
 
     //Perform Action on event

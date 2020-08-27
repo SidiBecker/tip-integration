@@ -2,7 +2,7 @@ const axios = require('axios');
 require('dotenv').config();
 
 // Add the authorization token to every Axios request.
-axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.TOKEN}`;
+axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.STREAMELEMENTS_JWT_TOKEN}`;
 
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
         try {
             var body = {
                 user: {
-                    userId: process.env.CHANNEL_ID,
+                    userId: process.env.STREAMELEMENTS_CHANNEL_ID,
                     username: user,
                     email: email
                 },
@@ -23,7 +23,7 @@ module.exports = {
                 currency: "BRL", //Fixed
                 imported: true
             }
-            const userAPI = `https://api.streamelements.com/kappa/v2/tips/${process.env.CHANNEL_ID}`;
+            const userAPI = `https://api.streamelements.com/kappa/v2/tips/${process.env.STREAMELEMENTS_CHANNEL_ID}`;
             const response = await axios.post(userAPI, body);
 
             console.log('API Response:', response.data);
