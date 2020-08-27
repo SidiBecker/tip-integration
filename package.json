@@ -1,0 +1,36 @@
+{
+  "name": "tip-integration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SidiBecker/tip-integration.git"
+  },
+  "author": "SidiBecker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SidiBecker/tip-integration/issues"
+  },
+  "homepage": "https://github.com/SidiBecker/tip-integration#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "consign": "^0.1.6",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "handlebars": "^4.7.6",
+    "nodemon": "^2.0.4",
+    "opn": "^6.0.0",
+    "passport": "^0.4.1",
+    "passport-oauth": "^1.0.0",
+    "request": "^2.88.2",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0"
+  }
+}
