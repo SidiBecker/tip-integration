@@ -19,7 +19,7 @@ module.exports = function (app) {
 
         let params = {
             'client_id': process.env.STREAMLABS_CLIENT_ID,
-            'redirect_uri': `${process.env.URL}:${process.env.PORT}/connect`,
+            'redirect_uri': `${process.env.STREAMLABS_CALLBACK_URL}`,
             'response_type': 'code',
             'scope': 'donations.read socket.token',
         }
