@@ -56,7 +56,7 @@ function initSocket(token, res) {
         console.log('Socket iniciado com sucesso!');
         console.log('Você pode fechar a aba do seu navegador.');
         console.log('\n\nATENÇÃO: Você deve manter esse programa aberto!');
-        res.redirect(`${process.env.URL}:${process.env.PORT}/`);
+        res.redirect(`${process.env.URL}`);
     });
 
     //Perform Action on event
