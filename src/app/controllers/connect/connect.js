@@ -17,6 +17,7 @@ module.exports = function (app) {
 
         let authorize_url = `${process.env.STREAMLABS_API}/authorize?`
 
+        console.log(process.env.STREAMLABS_CALLBACK_URL);
         let params = {
             'client_id': process.env.STREAMLABS_CLIENT_ID,
             'redirect_uri': `${process.env.STREAMLABS_CALLBACK_URL}`,

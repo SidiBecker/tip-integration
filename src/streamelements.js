@@ -9,7 +9,7 @@ module.exports = {
 
     importDonate: async function (user, email, amount, message) {
 
-        if (!user || !email || !amount || !message) return console.log('Data is invalid');
+        if (!user || !email || !amount ) return console.log('Data is invalid');
         try {
             var body = {
                 user: {
