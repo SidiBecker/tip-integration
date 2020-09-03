@@ -69,7 +69,7 @@ function initSocket(token, res) {
             console.log('Its a donation!')
 
         }
-
+   
         if (!(eventData.message != null && eventData.message.length > 0)) {
             return;
         }
@@ -87,7 +87,7 @@ function initSocket(token, res) {
             //code to handle donation events
             console.log(eventData.message);
 
-            importDonate(event.name, event.name + '@gmail.com', event.amount, event.message);
+            importDonate(event.name, event.name + '@importstreamlabs.com', event.amount, event.message);
         }
         if (eventData.for === 'twitch_account') {
             switch (eventData.type) {
@@ -106,7 +106,7 @@ function initSocket(token, res) {
                 case 'donation':
                     //code to handle subscription events
                     console.log(eventData.message);
-                    importDonate(event.name, event.name + '@gmail.com', event.amount, event.message);
+                    importDonate(event.name, event.email, event.amount, event.message);
                     break;
                 default:
                     //default case
@@ -120,8 +120,7 @@ function initSocket(token, res) {
                     //code to handle subscription events
                     console.log(eventData.message);
 
-                    //TODO: Donation
-                    importDonate(event.name, event.name + '@gmail.com', event.amount, event.message);
+                    importDonate(event.name, event.name + '@importstreamlabs.com', event.amount, event.message);
                     break;
                 default:
                     //default case
